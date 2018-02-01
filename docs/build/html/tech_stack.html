@@ -36,7 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Jaibik Map  documentation" href="index.html"/>
-        <link rel="prev" title="Data Elements" href="data_elements.html"/> 
+        <link rel="prev" title="Visual Elements" href="visual_elements.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -89,7 +89,14 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_elements.html">Data Elements</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Tech Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visual_elements.html">Visual Elements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tech Stack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#considerations">Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vector-tiles">Vector Tiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-stack-and-process">Software Stack and Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#outputs">Outputs</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -155,6 +162,69 @@
             
   <div class="section" id="tech-stack">
 <h1>Tech Stack<a class="headerlink" href="#tech-stack" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="considerations">
+<h2>Considerations<a class="headerlink" href="#considerations" title="Permalink to this headline">¶</a></h2>
+<p>While choosing the tech stack for the web portal we need think about scalability in terms of the following things</p>
+<ul class="simple">
+<li>Storage</li>
+<li>Performance</li>
+<li>Customizability</li>
+</ul>
+</div>
+<div class="section" id="vector-tiles">
+<h2>Vector Tiles<a class="headerlink" href="#vector-tiles" title="Permalink to this headline">¶</a></h2>
+<p>Vector data would best in terms of storage but it could cause performance issue in the client side. Serving raster tiles will allow getting around this issue but will require high storage and also customization would be restricted.
+Vector tiles is a developing technology that would allow to serve high performing and customizable.</p>
+<p>To display vector tiles we will need two types of files
+Style: A JSON style specification which describes how your map looks like
+Data: Vector Tiles as data source for your style</p>
+</div>
+<div class="section" id="software-stack-and-process">
+<h2>Software Stack and Process<a class="headerlink" href="#software-stack-and-process" title="Permalink to this headline">¶</a></h2>
+<p><strong>Creating and serving vector tiles will require following tools</strong></p>
+<ul class="simple">
+<li>Ogr2org from the GDAL package to convert the shapefile to geojson</li>
+<li>Tippecanoe - a command line tool to convert geojson to mbtiles</li>
+<li>Maputnik - a visual editor to create map styles for MapboxGL specification</li>
+<li>Tileserver - to serve the generated tiles</li>
+<li>MapboxGL - to display the generated tiles</li>
+</ul>
+<p><strong>The process of converting the shapefiles to vector tiles</strong></p>
+<ol class="arabic">
+<li><p class="first">Before using tippecanoe, you need to transform your data into EPSG:4326 coordinate system. We can use ogr2ogr utility which is part of gdal.</p>
+<blockquote>
+<div><p>ogr2ogr -f GeoJSON your_data_in_4326.json -t_srs EPSG:4326 your_data.shp</p>
+</div></blockquote>
+</li>
+<li><p class="first">Having your data in correct coordinate system, we can do the conversion using tippecanoe.</p>
+<blockquote>
+<div><p>tippecanoe -o your_data.mbtiles your_data_in_4326.json</p>
+</div></blockquote>
+</li>
+<li><p class="first">It will convert your data into MBTiles for zoom levels 0 to 14. This is the most simple use case and Tippecanoe enables much more sophisticated options for which we can check the documentation. <a class="reference external" href="https://github.com/mapbox/tippecanoe#options">https://github.com/mapbox/tippecanoe#options</a></p>
+</li>
+<li><p class="first">Style files can be generated using the Maputnik style editor. <a class="reference external" href="https://github.com/maputnik/editor">https://github.com/maputnik/editor</a></p>
+</li>
+<li><p class="first">The tileserver will now host the map tiles. It can use used from a docker image docker</p>
+<blockquote>
+<div><p>run –rm -it -v $(pwd):/data -p 8080:80 klokantech/tileserver-gl</p>
+<p>It is also available as a npm package. Docs for tileserver is available at <a class="reference external" href="https://">https://</a> tileserver.readthedocs.io/en/latest/index.html</p>
+</div></blockquote>
+</li>
+<li><p class="first">Mapbox GL JS is a web mapping library based on WebGL. Mapbox GL JS can be used for rendering the vector tileset.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="outputs">
+<h2>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h2>
+<p>We will have output file of 70 spices which will be provided as shapefiles.</p>
+<p>Size of the outputs (for zoom level 1 to 14)</p>
+<ul class="simple">
+<li>Base map of OpenStreetMap for Nepal can be stored in about 170 MB</li>
+<li>The output of HLZ classification can be stored in about 10 MB</li>
+<li>The output of species distribution modeling can be stored at about 1 MB</li>
+</ul>
+</div>
 </div>
 
 
@@ -168,7 +238,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="data_elements.html" class="btn btn-neutral" title="Data Elements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="visual_elements.html" class="btn btn-neutral" title="Visual Elements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
