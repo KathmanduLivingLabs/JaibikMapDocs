@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data Elements &mdash; Jaibik Map  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Jaibik Map  documentation" href="index.html"/>
+        <link rel="next" title="Visual Elements" href="visual_elements.html"/>
+        <link rel="prev" title="High Level Project Plan" href="high_level_project_plan.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Jaibik Map
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#species-probability-of-occurrence">Species’ probability of occurrence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#holdridge-life-zones">Holdridge Life Zones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#climate-change-scenarios">Climate change scenarios</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visual_elements.html">Visual Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_stack.html">Tech Stack</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Jaibik Map</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Data Elements</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/data_elements.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="data-elements">
+<h1>Data Elements<a class="headerlink" href="#data-elements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="species-probability-of-occurrence">
+<h2>Species’ probability of occurrence<a class="headerlink" href="#species-probability-of-occurrence" title="Permalink to this headline">¶</a></h2>
+<p><strong>What is probability of occurrence?</strong></p>
+<p>Probability of occurrence is the chance of finding the potential habitat area of a particular species inside a pixel based on given occurrence points and climatic parameters. The resolution of the final probability distribution map is 1km* 1km. Hence probability of occurrence in our case is the chance of finding potential habitat area of a species inside the area of 1km * 1km. The value for probability of occurrence ranges from 0-1000 where 0 means no probability of finding the species whereas 1000 means 100% chance of finding the particular species. This range can be normalized by dividing the standard values by 10 to get a percentage scale ranging from 0-100.</p>
+<p><strong>How many levels will the probability of occurance have?</strong></p>
+<p>The Probability of occurrence will be divided into 3 classes/levels namely:</p>
+<ul class="simple">
+<li>High:Probability of occurrence&gt;=75%</li>
+<li>Moderate:Probability of occurrence&gt;=50% and &lt;75%</li>
+<li>Low:Probability of occurrence&gt;50%</li>
+</ul>
+</div>
+<div class="section" id="holdridge-life-zones">
+<h2>Holdridge Life Zones<a class="headerlink" href="#holdridge-life-zones" title="Permalink to this headline">¶</a></h2>
+<p><strong>What are life zones?</strong>
+HLZ is a climate based vegetation classification scheme used to segregate a particular area into  various life zones.Biotemperature,precipitation,potential evapotranspiration and elevation are the four major parameters used in HLZ classification. The resolution of the HLZ map depends on the resolution of the input climatic variables. If climatic data from Worldclim is used , the resolution will be identical to the resolution of the potential habitat area map i.e, 1km*1km.</p>
+<p><strong>How many different types of zones are there?</strong></p>
+<p>This can range between anywhere 15-25. However, the major zones are:</p>
+<ul class="simple">
+<li>Alpine</li>
+<li>Subalpine</li>
+<li>Cool Temperate</li>
+<li>Warm Temperate</li>
+<li>Subtropical</li>
+<li>Tropical</li>
+</ul>
+<p>The additional zones are generated by further subdividing the above mentioned zones based on elevation and latitude.Currently 21 life zones were identified on the map generated by using the climatic data from Worldclim.</p>
+</div>
+<div class="section" id="climate-change-scenarios">
+<h2>Climate change scenarios<a class="headerlink" href="#climate-change-scenarios" title="Permalink to this headline">¶</a></h2>
+<p>According to the 5th assessment report of IPCC,four Representative Concentration Pathways(RCP) are identified. The RCPs predicts how the emission will evolve in time which consequently will give rise to different climatic conditions in the future.Various environmental and socio economic models are used to derive the RCPs. We are using the RCP 4.5 and 8.5 climatic scenarios.The RCP 4.5 more or less tries to mimic the business as usual trend of development with CO2 emissions peaking around the mid of the 21st century and slowly stabilizing towards the end of the century. The RCP 8.5 scenario is the worst case scenario which assumes the CO2 emissions will go in an overshoot mode giving rise to extreme climate change.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="visual_elements.html" class="btn btn-neutral float-right" title="Visual Elements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="high_level_project_plan.html" class="btn btn-neutral" title="High Level Project Plan" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kathmandu Living Labs.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

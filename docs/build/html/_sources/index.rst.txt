@@ -10,11 +10,7 @@ Welcome to Jaibik Map's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   introduction
+   data_elements
+   visual_elements
+   tech_stack
